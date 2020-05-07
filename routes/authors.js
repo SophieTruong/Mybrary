@@ -15,7 +15,8 @@ router.get('/',async(req,res)=>{
             authors: authors,
             searchOptions: req.query
         })
-    }catch{
+    }catch(err){
+        console.log(err);
         res.redirect('/');
     }
     
@@ -35,7 +36,7 @@ router.post('/',async(req,res)=>{
     try{
         const newAuthor = await author.save();
         // res.redirect('authors/${newAuthor.id}')
-        res.redirect('authors')
+        res.redirect('authors');
 
     }catch{
         res.render('authors/new',{
@@ -43,17 +44,6 @@ router.post('/',async(req,res)=>{
             errorMessage: 'Error creating Author'
         })
     }
-    // author.save((err,newAuthor) =>{
-    //     if(err){
-    //         res.render('authors/new',{
-    //             author: author,
-    //             errorMessage: 'Error creating Author'
-    //         })
-    //     } else{
-    //         // res.redirect('authors/${newAuthor.id}')
-    //         res.redirect('authors')
-    //     }
-    // })
 })
 
 module.exports = router;
